@@ -19,11 +19,11 @@ def print_board(board):
     print()
 
     #-----
-
+#check for available moves
 def available_moves(board):
     return [i for i in range(9) if board[i] == str(i+1)]
 
-#take player input
+#check for win
 def win_state(board):
     win_states = [(0,1,2), (3,4,5), (6,7,8),
                   (0,3,6), (1,4,7), (2,5,8),
@@ -32,10 +32,12 @@ def win_state(board):
         if board[a] == board[b] == board[c]:
             return board[a]
     return None
-
+         
+#check for tie/full board
 def is_full(board):
     return len(available_moves(board)) == 0
-
+         
+#take player input
 def input_index(board):
         global turn
         while True:
@@ -44,7 +46,7 @@ def input_index(board):
                 board[inp-1] = currentPlayer
                 turn += 1
                 break
-
+#computer move
 def computer(board):
     global turn
     best_score = -float("inf")
@@ -62,7 +64,7 @@ def computer(board):
     turn += 1
 
 
-#check for win or tie
+#minimax
 
 def minimax(board, is_maximizing):
     winner = win_state(board)
@@ -96,7 +98,7 @@ def minimax(board, is_maximizing):
 
 
 
-#check for win or tie again
+#main game loop
 
 while game_running == True:
     print_board(board)
